@@ -182,6 +182,7 @@ elif selected == "Home" or st.session_state['navigate_to_home']:
             """, unsafe_allow_html=True)
 
             service = st.selectbox("Service", service_names)
+            st.success(service)
             quantity = st.number_input("Quantity", min_value=100)            
             url = st.text_input("URL")
             service_rate = None
