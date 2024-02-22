@@ -139,7 +139,7 @@ if selected == "Login":
         if api_login(username, password):
             st.session_state['logged_in'] = True
             # st.session_state['navigate_to_home'] = True  # Navigate to Home page after login
-            st.success("You are now loged in go to Home tab")
+            st.success("You are now loged in go to Home tab (Just to check you are human 🤖)")
             # st.experimental_rerun()
         else:
             st.error("Login failed. Please check your username and password.")
@@ -156,7 +156,7 @@ elif selected == "Register":
         if api_register(username, password, phone):
             st.session_state['logged_in'] = True
             # st.session_state['navigate_to_home'] = True  # Navigate to Home page after registration
-            st.success("You are now loged in go to Home tab")
+            st.success("You are now loged in go to Home tab (Just to check you are human 🤖)")
             # st.experimental_rerun()
         else:
             st.error("Registration failed. Please try a different username.")
