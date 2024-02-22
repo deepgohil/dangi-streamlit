@@ -2,19 +2,19 @@ import streamlit as st
 from streamlit_option_menu import option_menu  # You might need to install this package
 import requests
 
-# st.set_page_config(page_title="Page Title", layout="wide")
+st.set_page_config(page_title="Page Title", layout="wide")
 
-# st.markdown("""
-#     <style>
-#         .reportview-container {
-#             margin-top: -2em;
-#         }
-#         #MainMenu {visibility: hidden;}
-#         .stDeployButton {display:none;}
-#         footer {visibility: hidden;}
-#         #stDecoration {display:none;}
-#     </style>
-# """, unsafe_allow_html=True)
+st.markdown("""
+    <style>
+        .reportview-container {
+            margin-top: -2em;
+        }
+        #MainMenu {visibility: hidden;}
+        .stDeployButton {display:none;}
+        footer {visibility: hidden;}
+        #stDecoration {display:none;}
+    </style>
+""", unsafe_allow_html=True)
 
 
 def fetch_services():
@@ -126,7 +126,7 @@ if 'navigate_to_home' not in st.session_state:
 # Sidebar for navigation
 with st.sidebar:
     selected = option_menu("boostallsocials", ["Login", "Register", "Home"], 
-                           icons=['house', 'book', 'gear'], menu_icon="instagram", default_index=0)
+                           icons=['house', 'book', 'gear'], menu_icon="instagram", default_index=2)
 
 # Login Page
 if selected == "Login":
@@ -173,7 +173,15 @@ elif selected == "Home" or st.session_state['navigate_to_home']:
 
         # Form with URL, Quantity, and Service
         with st.form("my_form"):
-            service = st.selectbox("Service", service_names)  # Use service names for options
+            st.markdown("""
+            <style>
+            div.stSelectbox > div > div > select {
+                padding: 10px;  /* Increase padding */
+            }
+            </style>
+            """, unsafe_allow_html=True)
+
+            service = st.selectbox("Service", service_names)
             quantity = st.number_input("Quantity", min_value=100)            
             url = st.text_input("URL")
             service_rate = None
