@@ -222,5 +222,5 @@ elif selected == "Home" or st.session_state['navigate_to_home']:
         st.image(photo_url, caption='This is your QR code for adding money')  # Displaying the photo with a caption
                 
     else:
-        st.error("You are not logged in. Please login to access the home page.")
+        st.error("You are not logged in. Please login to access the home page.(click on top right corner)")
 
