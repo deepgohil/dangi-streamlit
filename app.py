@@ -19,7 +19,7 @@ st.markdown("""
 
 def fetch_services():
     # API endpoint for fetching services
-    url = "https://dangi-steel.vercel.app/fetch-services"
+    url = "https://dangi-olive.vercel.app/fetch-services"
     
     # Headers
     headers = {'accept': 'application/json'}
@@ -40,7 +40,7 @@ def fetch_services():
 # Function to handle registration
 def api_register(username, password, phone):
     # API endpoint
-    url = "https://dangi-steel.vercel.app/register"
+    url = "https://dangi-olive.vercel.app/register"
     
     # Headers and payload
     headers = {'accept': 'application/json', 'Content-Type': 'application/json'}
@@ -61,7 +61,7 @@ def api_register(username, password, phone):
 # Mock function for API login call (replace with your actual API calls)
 def api_login(username, password):
     # API endpoint for login
-    url = "https://dangi-steel.vercel.app/token"
+    url = "https://dangi-olive.vercel.app/token"
     
     # Headers and payload
     headers = {'accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded'}
@@ -92,7 +92,7 @@ def api_login(username, password):
 
 def api_form(username, email, password):
     # The URL of the FastAPI endpoint
-    url = "https://dangi-steel.vercel.app/create-order"  # Change this URL to your FastAPI server URL
+    url = "https://dangi-olive.vercel.app/create-order"  # Change this URL to your FastAPI server URL
     
     # Query parameters
     params = {
