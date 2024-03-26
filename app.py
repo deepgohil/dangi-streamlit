@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit_option_menu import option_menu  # You might need to install this package
+from streamlit_option_menu import option_menu  
 import requests
 
 
@@ -193,7 +193,7 @@ def api_login(username, password):
 
 
 def api_form(username, quantity, url,price):
-    api_url = "http://127.0.0.1:8000/create-order"  
+    api_url = "https://dangi-olive.vercel.app/create-order"  
     if float(st.session_state['balance']) < 5:
                 st.error("Your balance is less thanPlease add funds.")
                 return
