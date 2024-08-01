@@ -598,6 +598,7 @@ elif selected == "TikTok Services" or st.session_state['navigate_to_home']:
         st.error("You are not logged in. Please login to access the home page.(click on top right corner)")
 
 if selected == "Add money":
+    amount=0
     if st.session_state.get('logged_in', False):
         username = st.session_state.get('username', '')
 
@@ -675,7 +676,6 @@ if selected == "Add money":
     <body>
         <div class="payment-container">
             <h1>Pay Now</h1>
-            <input type="number" id="amount" placeholder="Enter amount in Rs" min="1" step="1">
             <button class="pay-button" onclick="initiatePayment()">Pay Now</button>
         </div>
 
@@ -687,11 +687,11 @@ if selected == "Add money":
                     return;
                 }
 
-                // Replace '1234567890' with the actual phone number you want to receive payments to
-                var phoneNumber = '1234567890';
-                
-                // Construct the UPI link with the phone number
-                var upiLink = `upi://pay?pa=${phoneNumber}@upi&pn=Recipient%20Name&am=${amount}.00&cu=INR&tn=Payment%20for%20Service`;
+                var upiID = 'paytmqr15z3jl2zvk@paytm'; // Example: 'example@upi'
+                var recipientName = 'Shubham dangi'; // Replace with actual recipient name
+
+               
+                var upiLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(recipientName)}&am=${{amount}}&cu=INR&tn=Payment%20for%20Service`;
                 
                 // Attempt to open the UPI link
                 window.location.href = upiLink;
