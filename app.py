@@ -125,40 +125,6 @@ def api_register(username, password, phone):
         # Registration failed
         return False
 
-# # Mock function for API login call (replace with your actual API calls)
-# def api_login(username, password):
-#     # API endpoint for login
-#     url = "https://dangi-olive.vercel.app/token"
-#     MY_USERNAME=username
-    
-#     # Headers and payload
-#     headers = {'accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded'}
-#     payload = {
-#         'grant_type': '',  # Fill in if your API requires a specific grant type
-#         'username': username,
-#         'password': password,
-#         'scope': '',  # Fill in if your API requires a scope
-#         'client_id': '',  # Fill in if your API requires a client_id
-#         'client_secret': '',  # Fill in if your API requires a client_secret
-#     }
-    
-#     # Making the POST request
-#     response = requests.post(url, data=payload, headers=headers)
-    
-#     # Check if the request was successful
-#     if response.status_code == 200:
-#         # Assuming a successful login returns a 200 status code
-#         # Extract the access token from the response
-#         access_token = response.json().get('access_token')
-#         username = response.json().get('username')
-#         MY_BALANCE = response.json().get('balance')
-#         print(MY_BALANCE)
-#         if access_token:
-#             # Store the access token in the session state for later use (optional)
-#             st.session_state['access_token'] = access_token
-#             return True
-#     # Login failed
-#     return False
     
 def api_login(username, password):
     # API endpoint for login
@@ -638,9 +604,6 @@ if selected == "Add money":
         st.title("Add Money to Your Account")
         st.text(f"Current Balance: {st.session_state.get('balance', '0')}")
 
-        photo_url = 'https://audiodeepfile.s3.ap-south-1.amazonaws.com/WhatsApp+Image+2024-03-21+at+9.20.48+AM.jpeg'
-        st.image(photo_url, caption='This is your QR code for adding money')
-
         # Input for Transaction ID
         transaction_id = st.text_input("Transaction ID")
 
@@ -654,5 +617,96 @@ if selected == "Add money":
     else:
         st.error("You are not logged in. Please login to access the Add Money page.")
 
+    # HTML payment page logic
+    html_code = """
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Payment Page</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                background-color: #f0f0f0;
+            }
+            .payment-container {
+                background-color: white;
+                padding: 2rem;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                text-align: center;
+            }
+            h1 {
+                color: #333;
+            }
+            input[type="number"] {
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+            .pay-button {
+                background-color: #4CAF50;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+            }
+            .pay-button:hover {
+                background-color: #45a049;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="payment-container">
+            <h1>Pay Now</h1>
+            <input type="number" id="amount" placeholder="Enter amount in Rs" min="1" step="1">
+            <button class="pay-button" onclick="initiatePayment()">Pay Now</button>
+        </div>
 
+        <script>
+            function initiatePayment() {
+                var amount = document.getElementById('amount').value;
+                if (!amount || amount <= 0) {
+                    alert("Please enter a valid amount.");
+                    return;
+                }
+
+                // Replace '1234567890' with the actual phone number you want to receive payments to
+                var phoneNumber = '1234567890';
+                
+                // Construct the UPI link with the phone number
+                var upiLink = `upi://pay?pa=${phoneNumber}@upi&pn=Recipient%20Name&am=${amount}.00&cu=INR&tn=Payment%20for%20Service`;
+                
+                // Attempt to open the UPI link
+                window.location.href = upiLink;
+
+                // Set a timeout to check if the payment was successful
+                setTimeout(function() {
+                    var paymentSuccessful = confirm("Was the payment successful?");
+
+                }, 5000); // Wait for 5 seconds before asking
+            }
+        </script>
+    </body>
+    </html>
+    """
+
+    # Display the HTML code within Streamlit
+    st.components.v1.html(html_code, height=600)
                     
